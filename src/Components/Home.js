@@ -21,8 +21,9 @@ function Home() {
     }
     console.log(`Email is : ${email}`);
     axios.get('http://localhost:3001/player', config).then((response) => {
+      console.log(response);
       if( response.status === 200 && response.data.message === 'Player data is here'){
-        let teamId = response.data.data.teamId;
+        let teamId = response.data.data[0].teamId;
         if(teamId === undefined || teamId === ""){
           window.open("http://localhost:3000/join", "_self");
         }

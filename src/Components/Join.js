@@ -31,6 +31,7 @@ function Join() {
         axios.post('http://localhost:3001/team', {
             email: localStorage.getItem('tnkemail')
         }).then((response) => {
+            console.log(`The response is ${Object.keys(response)}`);
             if( response.status === 200 && response.data.message === 'Team added'){
                 window.open("http://localhost:3000/home", "_self");
             }
