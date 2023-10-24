@@ -5,7 +5,8 @@ import axios from 'axios';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 function Home() {
   const [email, setEmail] = useState("");
-  const [ team, setTeam ] = useState({});
+  const [ team, setTeam ] = useState([]);
+
   useEffect(() => {
     if(localStorage.getItem('tnkemail') !== undefined){
       console.log(`${localStorage.getItem('tnkemail')}`);
@@ -21,7 +22,7 @@ function Home() {
     }
     console.log(`Email is : ${email}`);
     axios.get('http://localhost:3001/player', config).then((response) => {
-      console.log(response);
+      // console.log(response);
       if( response.status === 200 && response.data.message === 'Player data is here'){
         let teamId = response.data.data[0].teamId;
         if(teamId === undefined || teamId === ""){
@@ -32,10 +33,9 @@ function Home() {
             id: teamId
           }
         }
-        axios.get('http://localhost:3001/team', confg).then((response2) => {
+        axios.get('http://localhost:3001/team', confg).then( async (response2) => {
           if(response2.status === 200 && response2.data.message === 'Team data is here'){
-            setTeam(response2.data.data[0]);
-            alert(team);
+            setTeam(response2.data.data);
           }
           else if(response2.status === 204){
             alert('Team not found');
@@ -61,6 +61,7 @@ function Home() {
   }
 
   const renderPlayer = (detail) => {
+    console.log(`Details are :- ${detail}`);
     if(detail === undefined){
       return(
         <div></div>
@@ -121,23 +122,23 @@ function Home() {
       <div className='container'>
         <div className='row d-flex justify-content-center'>
           <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.players !== undefined && team.players.length > 0 ) ? team.players[0] : undefined)}
+            {renderPlayer((team.length > 0 ) ? team[0] : undefined)}
           </div>
           <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.players !== undefined && team.players.length > 1 ) ? team.players[1] : undefined)}
+            {renderPlayer((team.length > 1 ) ? team[1] : undefined)}
           </div>
         </div>
         <div className='row d-flex justify-content-center'>
           <div className='col-12 align-items-center'>
-            {renderPlayer((team.players !== undefined && team.players.length > 2 ) ? team.players[2] : undefined)}
+            {renderPlayer((team.length > 2 ) ? team[2] : undefined)}
           </div>
         </div>
         <div className='row d-flex justify-content-center'>
           <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.players !== undefined && team.players.length > 3 ) ? team.players[3] : undefined)}
+            {renderPlayer((team.length > 3 ) ? team[3] : undefined)}
           </div>
           <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.players !== undefined && team.players.length > 4 ) ? team.players[4] : undefined)}
+            {renderPlayer((team.length > 4 ) ? team[4] : undefined)}
           </div>
         </div>
       </div>
