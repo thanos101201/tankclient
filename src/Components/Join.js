@@ -6,6 +6,16 @@ import axios from 'axios';
 function Join() {
     const [ open, setOpen ] = useState(false);
     const [ teamId, setTeamId ] = useState("");
+
+    const containerStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '20px',
+        borderRadius: '10px', // Neumorphism border radius
+        boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Neumorphism shadow
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Glassmorphism background color
+      };
+
     const handleJoin = () => {
         if(teamId === ""){
             alert('Provide the teamId');
@@ -40,9 +50,9 @@ function Join() {
         });
     }
   return (
-    <div>
+    <div style={containerStyle}>
         <NavComponent />
-        <Modal>
+        <Modal isOpen={open}>
             <ModalHeader>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-12 d-flex align-items-center'>
@@ -52,8 +62,8 @@ function Join() {
             </ModalHeader>
             <ModalBody>
                 <div className='row d-flex justify-content-center'>
-                    <div className='col-12 col-md-3 d-flex align-items-center'>
-                        <h3> Team Id </h3>
+                    <div className='col-12 m-3 col-md-3 d-flex align-items-center'>
+                        <h5> Team Id </h5>
                     </div>
                     <div className='col-12 col-md-9 d-flex align-items-center'>
                         <Input placeholder='Team Id to join' onClick={(e) => setTeamId(e.target.value)} />
@@ -63,33 +73,38 @@ function Join() {
             <ModalFooter>
                 <div className='row d-flex justify-content-center'>
                     <div className='col-12 col-md-6 d-flex align-items-center'>
-                        <Button onClick={() => {
-                            setOpen(!open);
-                        }}>Close</Button>
+                        <Button  style={{width:'7em', height:'5em'}} className='btn btn-success m-1' onClick={() => {
+                            handleJoin();
+                        }}>Join   </Button>
                     </div>
                     <div className='col-12 col-md-6 d-flex align-items-center'>
-                        <Button onClick={() => {
-                            handleJoin();
-                        }}>Join</Button>
+                        <Button  style={{width:'7em', height:'5em'}} className='btn btn-danger m-1' onClick={() => {
+                            setOpen(!open);
+                        }}>Close</Button>
                     </div>
                 </div>
             </ModalFooter>
         </Modal>
+        <br></br>
         <div className='container'>
             <div className='row d-flex justify-content-center'>
-                <div className='col-12 d-flex align-items-center'>
-                    <Card>
+                <div className='col-8 d-flex align-items-center pr-5 mr-5'>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <Card className='p-5' style={containerStyle}>
                         <CardBody>
                             <div className='row d-flex justify-content-center'>
-                                <div className='col-12 col-md-6 d-flex align-items-center'>
-                                    <Button onClick={() => {
+                                <div className='col-12 col-md-5 d-flex align-items-center'>
+                                    <Button className='btn btn-success m-3' onClick={() => {
                                         setOpen(!open);
-                                    }}>Join Team</Button>
+                                    }}><strong>Join Team</strong></Button>
                                 </div>
-                                <div className='col-12 col-md-6 d-flex align-items-center'>
-                                    <Button onClick={() => {
+                                <div className='col-12 col-md-5 d-flex align-items-center'>
+                                    <Button className='btn btn-danger m-3' onClick={() => {
                                         handleCreate();
-                                    }}>Create Team</Button>
+                                    }}> <strong>Create Team</strong></Button>
                                 </div>
                             </div>
                         </CardBody>
@@ -97,6 +112,19 @@ function Join() {
                 </div>
             </div>
         </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
     </div>
   )
 }

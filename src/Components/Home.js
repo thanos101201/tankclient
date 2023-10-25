@@ -69,45 +69,45 @@ function Home() {
     }
     else{
       return(
-        <Card>
+        <Card style={containerStyle}>
           <CardHeader>
             <div className='row d-flex justify-content-center'>
               <div className='col-12 d-flex align-items-center'>
-                <h3>{detail.name}</h3>
+                <h3 style={{color: 'white'}}>{detail.name}</h3>
               </div>
             </div>
           </CardHeader>
           <CardBody>
-            <div className='row d-flex justify-content-center'>
+            <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5>Rank : </h5>
+                <h5 style={{color: 'white'}}>Rank : </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5>  </h5>
-              </div>
-            </div>
-            <div className='row d-flex justify-content-center'>
-              <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5>Steps : </h5>
-              </div>
-              <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5> {calculateData(detail.steps)} </h5>
+                <h5 style={{color: 'white'}}>  </h5>
               </div>
             </div>
-            <div className='row d-flex justify-content-center'>
+            <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5>Calories : </h5>
+                <h5 style={{color: 'white'}}>Steps : </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5> {calculateData(detail.calorie)} </h5>
+                <h5 style={{color: 'white'}}> {calculateData(detail.steps)} </h5>
               </div>
             </div>
-            <div className='row d-flex justify-content-center'>
+            <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5>Heart Minutes : </h5>
+                <h5 style={{color: 'white'}}>Calories : </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5> {calculateData(detail.minutes)} </h5>
+                <h5 style={{color: 'white'}}> {calculateData(detail.calorie)} </h5>
+              </div>
+            </div>
+            <div className='row d-flex justify-content-left'>
+              <div className='col-12 col-md-3 d-flex align-items-center'>
+                <h5 style={{color: 'white'}}>Heart Minutes : </h5>
+              </div>
+              <div className='col-12 col-md-3 d-flex align-items-center'>
+                <h5 style={{color: 'white'}}> {calculateData(detail.minutes)} </h5>
               </div>
             </div>
           </CardBody>
@@ -116,10 +116,20 @@ function Home() {
     }
   }
 
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px',
+    borderRadius: '10px', // Neumorphism border radius
+    boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.3)', // Neumorphism shadow
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Glassmorphism background color
+  };
+
   return (
-    <div>
-      <NavComponent />
+    <div style={containerStyle}>
+      <NavComponent style={containerStyle} />
       <div className='container'>
+        <br></br>
         <div className='row d-flex justify-content-center'>
           <div className='col-12 col-md-6 align-items-center'>
             {renderPlayer((team.length > 0 ) ? team[0] : undefined)}
@@ -142,6 +152,18 @@ function Home() {
           </div>
         </div>
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
     </div>
   )
 }
