@@ -6,7 +6,8 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 function Home() {
   const [email, setEmail] = useState("");
   const [ team, setTeam ] = useState([]);
-
+  const [ teamName, setTeamName ] = useState("");
+  const [ teamId, setTeamId ] = useState("");
   useEffect(() => {
     if(localStorage.getItem('tnkemail') !== undefined){
       console.log(`${localStorage.getItem('tnkemail')}`);
@@ -36,6 +37,8 @@ function Home() {
         axios.get('http://localhost:3001/team', confg).then( async (response2) => {
           if(response2.status === 200 && response2.data.message === 'Team data is here'){
             setTeam(response2.data.data);
+            setTeamName(response2.data.name);
+            setTeamId(response2.data.id);
           }
           else if(response2.status === 204){
             alert('Team not found');
@@ -60,6 +63,17 @@ function Home() {
     return sum;
   }
 
+
+  const calculateRank = (email) => {
+    let steps = {}, minutes = {}, calories = {};
+    team.data.map((e) => {
+      steps[e.email] = calculateData(e.steps);
+      minutes[e.email] = calculateData(e.minutes);
+      calories[e.email] = calculateData(e.calorie)
+    });
+
+  }
+
   const renderPlayer = (detail) => {
     console.log(`Details are :- ${detail}`);
     if(detail === undefined){
@@ -80,15 +94,7 @@ function Home() {
           <CardBody>
             <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5 style={{color: 'white'}}>Rank : </h5>
-              </div>
-              <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5 style={{color: 'white'}}>  </h5>
-              </div>
-            </div>
-            <div className='row d-flex justify-content-left'>
-              <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5 style={{color: 'white'}}>Steps : </h5>
+                <h5 style={{color: 'white'}}>Steps: </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
                 <h5 style={{color: 'white'}}> {calculateData(detail.steps)} </h5>
@@ -96,7 +102,7 @@ function Home() {
             </div>
             <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5 style={{color: 'white'}}>Calories : </h5>
+                <h5 style={{color: 'white'}}>Calorie: </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
                 <h5 style={{color: 'white'}}> {calculateData(detail.calorie)} </h5>
@@ -104,7 +110,7 @@ function Home() {
             </div>
             <div className='row d-flex justify-content-left'>
               <div className='col-12 col-md-3 d-flex align-items-center'>
-                <h5 style={{color: 'white'}}>Heart Minutes : </h5>
+                <h5 style={{color: 'white'}}>Heart Minute: </h5>
               </div>
               <div className='col-12 col-md-3 d-flex align-items-center'>
                 <h5 style={{color: 'white'}}> {calculateData(detail.minutes)} </h5>
@@ -116,6 +122,31 @@ function Home() {
     }
   }
 
+  const renderName = () => {
+    if(team.length === 0){
+      return(
+        <div></div>
+      );
+    }
+    else{
+      return(
+        <h2>{teamName === "" ? "No Team Name" : teamName}</h2>
+      );
+    }
+  }
+
+  const renderId = () => {
+    if(team.length === 0){
+      return(
+        <div></div>
+      );
+    }
+    else{
+      return(
+        `${team[0].teamId}`
+      );
+    }
+  }
   const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -131,11 +162,23 @@ function Home() {
       <div className='container'>
         <br></br>
         <div className='row d-flex justify-content-center'>
-          <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.length > 0 ) ? team[0] : undefined)}
+          <div className='col-12 col-md-6 align-items-center' style={containerStyle}>
+              <h3 style={{color:'white'}}>{renderName()}</h3>
+            </div>
+        </div>
+        <br></br>
+        <div className='row d-flex justify-content-center'>
+          <div className='col-12 col-md-6 align-items-center' style={containerStyle}>
+              <h5 style={{color:'white'}}>{renderId()}</h5>
+            </div>
+        </div>
+        <br></br>
+        <div className='row d-flex justify-content-center'>
+          <div className='col-12 col-md-5 m-1 align-items-center'>
+            {renderPlayer(( team.length > 0 ) ? team[0] : undefined)}
           </div>
-          <div className='col-12 col-md-6 align-items-center'>
-            {renderPlayer((team.length > 1 ) ? team[1] : undefined)}
+          <div className='col-12 col-md-5 m-1 align-items-center'>
+            {renderPlayer(( team.length > 1 ) ? team[1] : undefined)}
           </div>
         </div>
         <div className='row d-flex justify-content-center'>

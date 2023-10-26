@@ -70,7 +70,7 @@ function NavComponent() {
             <Button className='btn btn-danger m-1' onClick={() => {
               localStorage.removeItem('username', undefined);
               localStorage.removeItem('password', undefined);
-              window.open("https://lunchserver-two.vercel.app", "_self");
+              window.open("http://localhost:3000/", "_self");
             }}>Log Out</Button>
           </ButtonGroup>
         </NavItem>

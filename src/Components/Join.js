@@ -25,7 +25,7 @@ function Join() {
                 email: localStorage.getItem('tnkemail'),
                 id: teamId
             }).then((response) => {
-                if( response.status === 200 && response.data.message === 'Team added'){
+                if( response.status === 200 && response.data.message === 'Joined team'){
                     window.open("http://localhost:3000/home", "_self");
                 }
                 else if(response.status === 403){
