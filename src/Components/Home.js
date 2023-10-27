@@ -14,7 +14,7 @@ function Home() {
       setEmail(localStorage.getItem('tnkemail'));
     }
     else{
-      window.open('http://localhost:3000/login', "_self");
+      window.open('https://tankclient.vercel.app/login', "_self");
     }
     const config = {
       headers: {
@@ -22,19 +22,19 @@ function Home() {
       }
     }
     console.log(`Email is : ${email}`);
-    axios.get('http://localhost:3001/player', config).then((response) => {
+    axios.get('https://tankserver.vercel.app/player', config).then((response) => {
       // console.log(response);
       if( response.status === 200 && response.data.message === 'Player data is here'){
         let teamId = response.data.data[0].teamId;
         if(teamId === undefined || teamId === ""){
-          window.open("http://localhost:3000/join", "_self");
+          window.open("https://tankclient.vercel.app/join", "_self");
         }
         let confg = {
           headers: {
             id: teamId
           }
         }
-        axios.get('http://localhost:3001/team', confg).then( async (response2) => {
+        axios.get('https://tankserver.vercel.app/team', confg).then( async (response2) => {
           if(response2.status === 200 && response2.data.message === 'Team data is here'){
             setTeam(response2.data.data);
             setTeamName(response2.data.name);

@@ -21,12 +21,12 @@ function Join() {
             alert('Provide the teamId');
         }
         else{
-            axios.put('http://localhost:3001/team/join', {
+            axios.put('https://tankserver.vercel.app/team/join', {
                 email: localStorage.getItem('tnkemail'),
                 id: teamId
             }).then((response) => {
                 if( response.status === 200 && response.data.message === 'Joined team'){
-                    window.open("http://localhost:3000/home", "_self");
+                    window.open("https://tankclient.vercel.app/home", "_self");
                 }
                 else if(response.status === 403){
                     alert(response.data.message);
@@ -38,12 +38,12 @@ function Join() {
     }
 
     const handleCreate = () => {
-        axios.post('http://localhost:3001/team', {
+        axios.post('https://tankserver.vercel.app/team', {
             email: localStorage.getItem('tnkemail')
         }).then((response) => {
             console.log(`The response is ${Object.keys(response)}`);
             if( response.status === 200 && response.data.message === 'Team added'){
-                window.open("http://localhost:3000/home", "_self");
+                window.open("https://tankclient.vercel.app/home", "_self");
             }
         }).catch((eror) => {
 

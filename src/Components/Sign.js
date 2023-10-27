@@ -22,14 +22,14 @@ function Sign() {
             }
         }
         console.log(`Code is here ${code}`);
-        axios.get('http://localhost:3001/player/ply',config).then((response) => {
+        axios.get('https://tankserver.vercel.app/player/ply',config).then((response) => {
             if(response.data.message === "User added"){
                 localStorage.setItem('tnkemail', response.data.email);
-                window.open("http://localhost:3000/join", "_self");
+                window.open("https://tankclient.vercel.app/join", "_self");
             }
             else if(response.data.message === "Data updated"){
                 localStorage.setItem('tnkemail', response.data.email);
-                window.open("http://localhost:3000/home", "_self");
+                window.open("https://tankclient.vercel.app/home", "_self");
             }
             else{
                 alert(response.data.data);

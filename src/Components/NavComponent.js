@@ -13,7 +13,7 @@ function NavComponent() {
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Glassmorphism background color
   };
   const handleUpdate = () => {
-    axios.put('http://localhost:3001/team/name', {
+    axios.put('https://tankserver.vercel.app/team/name', {
       name: teamName,
       email: localStorage.getItem('tnkemail')
     }).then((response) => {
@@ -70,7 +70,7 @@ function NavComponent() {
             <Button className='btn btn-danger m-1' onClick={() => {
               localStorage.removeItem('username', undefined);
               localStorage.removeItem('password', undefined);
-              window.open("http://localhost:3000/", "_self");
+              window.open("https://tankclient.vercel.app/", "_self");
             }}>Log Out</Button>
           </ButtonGroup>
         </NavItem>

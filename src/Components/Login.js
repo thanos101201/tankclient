@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand, NavLink, Button } from 'reactstrap';
 import axios from 'axios';
 function Login() {
     const handleLogin = () => {
-        axios.get('http://localhost:3001/log').then((response) => {
+        axios.get('https://tankserver.vercel.app/log').then((response) => {
             window.open(response.data.url, "_self");
         }).catch((eror) => {
             alert(eror.message);
