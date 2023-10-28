@@ -35,7 +35,9 @@ function Sign() {
                 alert(response.data.data);
             }
         }).catch((eror) => {
-            alert(eror.message);
+            if(eror.message === 'Install google fit application'){
+                alert('Install google fit application and link your app with the email id');
+            }
         });
     }, []);
   return (
